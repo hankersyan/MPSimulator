@@ -2,7 +2,7 @@
 import socket
 import packets
 
-localIP     = "127.0.0.1"
+localIP     = "0.0.0.0"
 localPort   = 24105
 bufferSize  = 1024
 
@@ -13,6 +13,7 @@ if __name__ == '__main__':
   # Bind to address and ip
   serv.bind((localIP, localPort))
 
+  print('receiving association request')
   bytesAddressPair = serv.recvfrom(bufferSize)
   message = bytesAddressPair[0]
   address = bytesAddressPair[1]
@@ -25,16 +26,20 @@ if __name__ == '__main__':
     serv.sendto(packets.mds_create_event_report, address)
 
     # mds create event result
+    print('receiving mds create event result')
     bytesAddressPair = serv.recvfrom(bufferSize)
     # rtsa priority list
+    print('receiving rtsa priority list')
     bytesAddressPair = serv.recvfrom(bufferSize)
     # set rtsa priority list
+    print('receiving set rtsa priority list')
     bytesAddressPair = serv.recvfrom(bufferSize)
 
     i = 0
 
     while(True):
       # poll request
+      print('receiving two poll requests')
       bytesAddressPair = serv.recvfrom(bufferSize)
       bytesAddressPair = serv.recvfrom(bufferSize)
 
@@ -67,3 +72,4 @@ if __name__ == '__main__':
         serv.sendto(packets.rsp_group_4_no_7, address)
 
       i += 1
+      i = i % 4
