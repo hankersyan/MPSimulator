@@ -17,7 +17,7 @@ if __name__ == '__main__':
   message = bytesAddressPair[0]
   address = bytesAddressPair[1]
 
-  ba = bytearray([int(message, 16)])
+  ba = bytearray(message)
 
   if ba == packets.association_request_ba:
     print('Accept Association Request')
