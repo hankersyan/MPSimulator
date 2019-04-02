@@ -36,12 +36,37 @@ def startSendData(serv, clientAddress):
           serv.sendto(packets.rsp_nu_3_no_1, address)
           serv.sendto(packets.rsp_nu_3_no_2, address)
           serv.sendto(packets.rsp_nu_3_no_3, address)
-        else:
+        elif (3 == nu):
           serv.sendto(packets.rsp_nu_4_no_1, address)
           serv.sendto(packets.rsp_nu_4_no_2, address)
           serv.sendto(packets.rsp_nu_4_no_3, address)
+        elif (4 == nu):
+          serv.sendto(packets.rsp_nu_5_no_1, address)
+          serv.sendto(packets.rsp_nu_5_no_2, address)
+          serv.sendto(packets.rsp_nu_5_no_3, address)
+        elif (5 == nu):
+          serv.sendto(packets.rsp_nu_6_no_1, address)
+          serv.sendto(packets.rsp_nu_6_no_2, address)
+          serv.sendto(packets.rsp_nu_6_no_3, address)
+        elif (6 == nu):
+          serv.sendto(packets.rsp_nu_7_no_1, address)
+          serv.sendto(packets.rsp_nu_7_no_2, address)
+          serv.sendto(packets.rsp_nu_7_no_3, address)
+        elif (7 == nu):
+          serv.sendto(packets.rsp_nu_8_no_1, address)
+          serv.sendto(packets.rsp_nu_8_no_2, address)
+          serv.sendto(packets.rsp_nu_8_no_3, address)
+        elif (8 == nu):
+          serv.sendto(packets.rsp_nu_9_no_1, address)
+          serv.sendto(packets.rsp_nu_9_no_2, address)
+          serv.sendto(packets.rsp_nu_9_no_3, address)
+        else:
+          serv.sendto(packets.rsp_nu_10_no_1, address)
+          serv.sendto(packets.rsp_nu_10_no_2, address)
+          serv.sendto(packets.rsp_nu_10_no_3, address)
+          serv.sendto(packets.rsp_nu_10_no_4, address)
         nu += 1
-        nu = nu % 4
+        nu = nu % 10
       elif (message[33] == 0x09):
         # wave
         print('accept poll request of wave')
@@ -53,13 +78,44 @@ def startSendData(serv, clientAddress):
           serv.sendto(packets.rsp_wave_3_no_1, address)
           serv.sendto(packets.rsp_wave_3_no_2, address)
           serv.sendto(packets.rsp_wave_3_no_3, address)
-        else:
+        elif (3 == wa):
           serv.sendto(packets.rsp_wave_4_no_1, address)
           serv.sendto(packets.rsp_wave_4_no_2, address)
           serv.sendto(packets.rsp_wave_4_no_3, address)
           serv.sendto(packets.rsp_wave_4_no_4, address)
+        elif (4 == wa):
+          serv.sendto(packets.rsp_wave_5_no_1, address)
+          serv.sendto(packets.rsp_wave_5_no_2, address)
+          serv.sendto(packets.rsp_wave_5_no_3, address)
+          serv.sendto(packets.rsp_wave_5_no_4, address)
+        elif (5 == wa):
+          serv.sendto(packets.rsp_wave_6_no_1, address)
+          serv.sendto(packets.rsp_wave_6_no_2, address)
+          serv.sendto(packets.rsp_wave_6_no_3, address)
+          serv.sendto(packets.rsp_wave_6_no_4, address)
+        elif (6 == wa):
+          serv.sendto(packets.rsp_wave_7_no_1, address)
+          serv.sendto(packets.rsp_wave_7_no_2, address)
+          serv.sendto(packets.rsp_wave_7_no_3, address)
+          serv.sendto(packets.rsp_wave_7_no_4, address)
+        elif (7 == wa):
+          serv.sendto(packets.rsp_wave_8_no_1, address)
+          serv.sendto(packets.rsp_wave_8_no_2, address)
+          serv.sendto(packets.rsp_wave_8_no_3, address)
+          serv.sendto(packets.rsp_wave_8_no_4, address)
+        elif (8 == wa):
+          serv.sendto(packets.rsp_wave_9_no_1, address)
+          serv.sendto(packets.rsp_wave_9_no_2, address)
+          serv.sendto(packets.rsp_wave_9_no_3, address)
+          serv.sendto(packets.rsp_wave_9_no_4, address)
+        else:
+          serv.sendto(packets.rsp_wave_10_no_1, address)
+          serv.sendto(packets.rsp_wave_10_no_2, address)
+          serv.sendto(packets.rsp_wave_10_no_3, address)
+          serv.sendto(packets.rsp_wave_10_no_4, address)
+          return 0
         wa += 1
-        wa = wa % 4
+        wa = wa % 10
 
 def startListen(serv):
   print('Waiting association request')
