@@ -3,6 +3,7 @@ import socket
 import packets
 import time
 from multiprocessing import Process
+import datetime
 
 localIP     = "0.0.0.0"
 localPort   = 24105
@@ -118,7 +119,7 @@ def startSendData(serv, clientAddress):
         wa = wa % 10
 
 def startListen(serv):
-  print('Waiting association request')
+  print('Waiting association request at ' + str(datetime.datetime.now()))
   serv.settimeout(None)
   bytesAddressPair = serv.recvfrom(bufferSize)
   try:
