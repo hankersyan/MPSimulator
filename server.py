@@ -8,6 +8,7 @@ import datetime
 localIP     = "0.0.0.0"
 localPort   = 24105
 bufferSize  = 1024
+absoluteDate = 0
 
 def startSendData(serv, clientAddress):
   nu = 0
@@ -132,7 +133,31 @@ def startListen(serv):
     if ba == packets.association_request_ba:
       print('Accept Association Request')
       serv.sendto(packets.association_response, address)
-      serv.sendto(packets.mds_create_event_report, address)
+
+      absoluteDate = datetime.datetime.now()
+      mdsCreateEventReport = packets.mds_create_event_report
+      idxOfAbsTime = 0
+      for i in range(len(mdsCreateEventReport) - 16):
+        if mdsCreateEventReport[i] == 0x09 and mdsCreateEventReport[i+1] == 0x87 and mdsCreateEventReport[i+2] == 0x00 and mdsCreateEventReport[i+3] == 0x08:
+          idxOfAbsTime = i
+          break
+
+      # BCD encodes 20 => 0x20
+      tmp = [int(str(int(absoluteDate.year/100)), 16),
+        int(str(absoluteDate.year%100), 16),
+        int(str(absoluteDate.month), 16),
+        int(str(absoluteDate.day), 16),
+        int(str(absoluteDate.hour), 16),
+        int(str(absoluteDate.minute), 16),
+        int(str(absoluteDate.second), 16),0]
+      # tmp = [int(absoluteDate.year/100), absoluteDate.year%100, absoluteDate.month, 
+      #   absoluteDate.day, absoluteDate.hour, absoluteDate.minute, absoluteDate.second, 0]
+      print(type(mdsCreateEventReport[:idxOfAbsTime+4]))
+      print(type(bytearray(tmp)))
+      print(type(mdsCreateEventReport[idxOfAbsTime+11:]))
+      mdsCreateEventReport = mdsCreateEventReport[:idxOfAbsTime+4] + bytearray(tmp) + mdsCreateEventReport[idxOfAbsTime+12:]
+
+      serv.sendto(mdsCreateEventReport, address)
 
       # mds create event result
       print('Waiting mds create event result')
