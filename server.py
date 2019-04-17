@@ -115,7 +115,6 @@ def startSendData(serv, clientAddress):
           serv.sendto(packets.rsp_wave_10_no_2, address)
           serv.sendto(packets.rsp_wave_10_no_3, address)
           serv.sendto(packets.rsp_wave_10_no_4, address)
-          return 0
         wa += 1
         wa = wa % 10
 
